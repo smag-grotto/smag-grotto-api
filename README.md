@@ -9,7 +9,7 @@
 
 ### 400 - Bad Request
 For a generic client error:
-```json
+```js
 {
 	"message": "Client error."
 }
@@ -17,7 +17,7 @@ For a generic client error:
 
 ### 401 - Unauthorized
 For endpoints that require authorization and invalid authorization is given:
-```json
+```js
 {
 	"message": "Authorization required."
 }
@@ -25,7 +25,7 @@ For endpoints that require authorization and invalid authorization is given:
 
 ### 404 - Not Found
 For when a requested file cannot be found or does not exist:
-```json
+```js
 {
 	"message": "Resource not found."
 }
@@ -41,7 +41,7 @@ For when a requested file cannot be found or does not exist:
 - `password` - ^.*$
 
 #### Response (201)
-```json
+```js
 {
 	"message": "User created.",
 	"user": "" // created username
