@@ -39,11 +39,39 @@ For when a requested file cannot be found or does not exist:
 #### Parameters
 - `username` - ^\w{3,16}$
 - `password` - ^.*$
+- `confirm_password` - ^.*$
 
 #### Response (201)
 ```js
 {
 	"message": "User created.",
 	"user": "" // created username
+}
+```
+
+#### Response (400: username doesn't match criteria, username is taken, passwords don't match)
+```js
+{
+	"message": "Client error."
+}
+```
+
+### `POST /api/login`
+#### Parameters
+- `username` - ^\w{3,16}$
+- `password` - ^.*$
+
+#### Response (200)
+```js
+{
+	"message" "Login successful.",
+	"user": {} // User object
+}
+```
+
+#### Response (400, username and password don't exist/match)
+```js
+{
+	"message" "Invalid credentials."
 }
 ```
