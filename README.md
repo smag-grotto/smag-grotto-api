@@ -44,6 +44,6 @@ For when a requested file cannot be found or does not exist:
 ```json
 {
 	"message": "User created.",
-	"user": <string>
+	"user": "" // created username
 }
 ```
