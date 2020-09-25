@@ -1,77 +1,33 @@
-# Smag Grotto - API v1
+# Smag Grotto API
 
-## REST API
-1. Responses must be JSON.
-2. 🔐 indicates that an endpoint requires a valid `authorization` header. An unauthorized request should respond with a 401 error.
-3. `?` indicates that a parameter is optional.
+The API for Smag Grotto is served at [api.smag.lol](api.smag.lol).
 
-## Default Responses
+Authorised routes, prefixed with a 🔐, require an additional parameter:
+- <u>authentication</u>, type String(16), the auth string specific to the user
 
-### 400 - Bad Request
-For a generic client error:
+## Routes
+
+### `GET /users`
+#### Response 200
 ```js
 {
-	"message": "Client error."
+	"users": [
+		...UserObject(name, picture, bio)
+	]
 }
 ```
-
-### 401 - Unauthorized
-For endpoints that require authorization and invalid authorization is given:
-```js
-{
-	"message": "Authorization required."
-}
-```
-
-### 404 - Not Found
-For when a requested file cannot be found or does not exist:
-```js
-{
-	"message": "Resource not found."
-}
-```
-
-## Endpoints
-
-### Authentication
-
-### `POST /api/signup`
+### 🔐 `POST /users`
 #### Parameters
-- `username` - ^\w{3,16}$
-- `password` - ^.*$
-- `confirm_password` - ^.*$
-
-#### Response (201)
+- <u>name</u>, type String(3, 32), the name of the user
+- <u>picture</u>, type String(), a link to a picture
+- <u>bio</u>, type String(3, 512), a short bio
+#### Response 201
 ```js
 {
-	"message": "User created.",
-	"user": "" // created username
+	"message": "successfully added user"
 }
 ```
 
-#### Response (400: username doesn't match criteria, username is taken, passwords don't match)
-```js
-{
-	"message": "Client error."
-}
-```
-
-### `POST /api/login`
-#### Parameters
-- `username` - ^\w{3,16}$
-- `password` - ^.*$
-
-#### Response (200)
-```js
-{
-	"message" "Login successful.",
-	"user": {} // User object
-}
-```
-
-#### Response (400, username and password don't exist/match)
-```js
-{
-	"message" "Invalid credentials."
-}
+```bash
+*/5 * * * * /bin/cp data.json /var/backups/data.json
 ```
