@@ -1,6 +1,6 @@
 # Smag Grotto API
 
-The API for Smag Grotto is served at [api.smag.lol](api.smag.lol).
+The API for Smag Grotto is served at [https://api.smag.lol](https://api.smag.lol).
 
 Authorised routes, prefixed with a 🔐, require an additional parameter:
 - <u>authentication</u>, type String(16), the auth string specific to the user
@@ -26,8 +26,4 @@ Authorised routes, prefixed with a 🔐, require an additional parameter:
 {
 	"message": "successfully added user"
 }
-```
-
-```bash
-*/5 * * * * /bin/cp data.json /var/backups/data.json
 ```

@@ -1,2 +1,3 @@
-src/data.json
 .env
+src/app.wsgi
+src/data/data.json
