@@ -12,19 +12,19 @@ app = Flask(__name__)
 # restriction: only allow required parameters to be posted
 
 
-@app.route("/users", methods=["GET", "POST"])
-def users():
+@app.route("/members", methods=["GET", "POST"])
+def members():
     if request.method == "GET":
         with open(os.getenv("DATA"), "r") as file:
             data = json.load(file)
 
             return jsonify(data), 200
     elif request.method == "POST":
-        # restriction: parameter(s) required
+        # restriction: parameters required
         if not all(key in request.json for key in ("name", "picture", "bio")):
             return jsonify({"message": "all parameters are required: name, picture, bio"}), 400
 
-        # resriction: parameter(s) length
+        # resriction: parameters length
         if len(request.json["name"]) < 3 or len(request.json["name"]) > 32:
             return jsonify({"message": "name parameter must be between 3 and 32 characters"}), 400
 
@@ -35,16 +35,16 @@ def users():
             data = json.load(file)
 
         # resriction: name duplicate
-        for user in data["users"]:
-            if user["name"] == request.json["name"]:
+        for member in data["members"]:
+            if member["name"] == request.json["name"]:
                 return jsonify({"message": "name is already taken"}), 400
 
-        data["users"].append(request.json)
+        data["members"].append(request.json)
 
         with open(os.getenv("DATA"), "w") as file:
             json.dump(data, file)
 
-        return jsonify({"message": "successfully added user"}), 201
+        return jsonify({"message": "successfully added member"}), 201
 
 
 @ app.errorhandler(404)
