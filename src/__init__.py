@@ -1,8 +1,7 @@
 from flask import Flask, jsonify, request
+from dotenv import load_dotenv
 import os
 import json
-
-from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -35,10 +34,10 @@ def users():
         with open(os.getenv("DATA"), "r") as file:
             data = json.load(file)
 
-            # resriction: name duplicate
-            for user in data["users"]:
-                if user["name"] == request.json["name"]:
-                    return jsonify({"message": "name is already taken"}), 400
+        # resriction: name duplicate
+        for user in data["users"]:
+            if user["name"] == request.json["name"]:
+                return jsonify({"message": "name is already taken"}), 400
 
         data["users"].append(request.json)
 
