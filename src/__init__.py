@@ -25,9 +25,6 @@ def members():
             return jsonify({"message": "name and picture parameters are required"}), 400
 
         # resriction: parameters length
-        if len(request.json["name"]) < 3 or len(request.json["name"]) > 32:
-            return jsonify({"message": "name parameter must be between 3 and 32 characters"}), 400
-
         if "bio" in request.json and len(request.json["bio"]) > 512:
             return jsonify({"message": "bio parameter must be less than 512 characters"}), 400
 
