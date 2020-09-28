@@ -21,15 +21,18 @@ def members():
             return jsonify(data), 200
     elif request.method == "POST":
         # restriction: parameters required
-        if not all(key in request.json for key in ("name", "picture", "bio")):
-            return jsonify({"message": "all parameters are required: name, picture, bio"}), 400
+        if not all(key in request.json for key in ("name", "picture")):
+            return jsonify({"message": "name and picture parameters are required"}), 400
 
         # resriction: parameters length
         if len(request.json["name"]) < 3 or len(request.json["name"]) > 32:
             return jsonify({"message": "name parameter must be between 3 and 32 characters"}), 400
 
-        if len(request.json["bio"]) < 3 or len(request.json["bio"]) > 512:
-            return jsonify({"message": "bio parameter must be between 3 and 512 characters"}), 400
+        if "bio" in request.json and len(request.json["bio"]) > 512:
+            return jsonify({"message": "bio parameter must be less than 512 characters"}), 400
+
+        if "bio" not in request.json:
+            request.json["bio"] = "This member has not yet set a bio."
 
         with open(os.getenv("DATA"), "r") as file:
             data = json.load(file)

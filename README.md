@@ -1,6 +1,6 @@
 # Smag Grotto API
 
-The API for Smag Grotto is served at [https://api.smag.lol](https://api.smag.lol).
+The API for Smag Grotto is served at [http://api.smag.lol](http://api.smag.lol).
 
 Authorised routes, prefixed with a 🔐, require an additional parameter:
 - <u>authentication</u>, type String(16), the auth string specific to the member
@@ -12,7 +12,7 @@ Authorised routes, prefixed with a 🔐, require an additional parameter:
 ```js
 {
 	"members": [
-		...MembersObject(name, picture, bio)
+		...MemberObject(name, picture, bio)
 	]
 }
 ```
@@ -20,7 +20,7 @@ Authorised routes, prefixed with a 🔐, require an additional parameter:
 #### Parameters
 - <u>name</u>, type String(3, 32), the name of the member
 - <u>picture</u>, type String(), a link to a picture
-- <u>bio</u>, type String(3, 512), a short bio
+- <u>bio</u>, type String(,512), a short bio
 #### Response 201
 ```js
 {
