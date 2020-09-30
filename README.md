@@ -7,10 +7,13 @@ Authorised routes, prefixed with a 🔐, require an additional parameter:
 
 ## Preview Routes
 
-#### `GET /members` - return all members
-#### `POST /members` - create new member
-#### `GET /members/<member>` - get a member
-#### TODO `PATCH /members/<member>` - edit a member
+`GET /members` - return all members
+
+`POST /members` - create new member
+
+`GET /members/<member>` - get a member
+
+TODO `PATCH /members/<member>` - edit a member
 
 ## Routes
 

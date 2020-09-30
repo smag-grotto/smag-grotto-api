@@ -51,7 +51,7 @@ def member(member):
 
         for _member in data["members"]:
             if _member["name"] == member:
-                return jsonify(_member)
+                return jsonify(_member), 200
 
         return jsonify({"message": "member does not exist"}), 404
     elif request.method == "PATCH":
