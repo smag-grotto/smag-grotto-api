@@ -7,10 +7,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# TODO:
-# restriction: authorised only
-# restriction: only allow required parameters to be posted
-
 
 @app.route("/members", methods=["GET", "POST"])
 def members():
@@ -18,7 +14,7 @@ def members():
         with open(os.getenv("DATA"), "r") as file:
             data = json.load(file)
 
-            return jsonify(data), 200
+        return jsonify(data), 200
     elif request.method == "POST":
         # restriction: parameters required
         if not all(key in request.json for key in ("name", "picture")):
@@ -45,6 +41,23 @@ def members():
             json.dump(data, file)
 
         return jsonify({"message": "successfully added member"}), 201
+
+
+@app.route("/members/<member>", methods=["GET", "PATCH"])
+def member(member):
+    if request.method == "GET":
+        with open(os.getenv("DATA"), "r") as file:
+            data = json.load(file)
+
+        for _member in data["members"]:
+            if _member["name"] == member:
+                return jsonify(_member)
+
+        return jsonify({"message": "member does not exist"}), 404
+    elif request.method == "PATCH":
+        # member: old member
+        # request.json: properties to edit
+        return member
 
 
 @ app.errorhandler(404)
