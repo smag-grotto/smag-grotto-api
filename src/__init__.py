@@ -49,15 +49,28 @@ def member(member):
         with open(os.getenv("DATA"), "r") as file:
             data = json.load(file)
 
-        for _member in data["members"]:
-            if _member["name"] == member:
-                return jsonify(_member), 200
+        for member_i in data["members"]:
+            if member_i["name"] == member:
+                return jsonify(member_i), 200
 
         return jsonify({"message": "member does not exist"}), 404
     elif request.method == "PATCH":
-        # member: old member
-        # request.json: properties to edit
-        return member
+        with open(os.getenv("DATA"), "r") as file:
+            data = json.load(file)
+
+        for member_i in data["members"]:
+            if member_i["name"] == member:
+                if len(request.json) != 1:
+                    return jsonify({"message": "you can only edit one property at a time"}), 400
+
+                member_i[list(request.json.keys())[0]] = list(request.json.values())[0]
+
+                with open(os.getenv("DATA"), "w") as file:
+                    json.dump(data, file)
+
+                return jsonify({"message": "successfully edited member"})
+
+        return jsonify({"message": "member does not exist"}), 404
 
 
 @ app.errorhandler(404)
